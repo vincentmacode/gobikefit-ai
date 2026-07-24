@@ -32,9 +32,9 @@ python3 -m http.server 8000
   and footer).
 - **Domain**: `https://gobikefit.com` is used in canonical + Open Graph tags on
   all four pages — replace with the real domain.
-- **Legal text**: `legal/terms/index.html` still contains lorem-ipsum
-  placeholders and a `[DATE]` marker. Paste in the final text and remove the
-  `noindex` meta tag on that page. (The Privacy Policy is final.)
+- **Terms of Use entity details**: `legal/terms/index.html` still contains
+  `[Your Legal Name / Company Name]` (intro paragraph) and `[Your State/Country]`
+  (§11 Governing Law) — fill these in. (Both legal texts are otherwise final.)
 - **OG image**: `index.html` references `og-image.png` (1200×630) — add one at
   the site root.
 - **Favicon**: `favicon.svg` is a placeholder; swap in final app-icon artwork.
