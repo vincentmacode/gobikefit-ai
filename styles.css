@@ -129,7 +129,7 @@ svg {
 }
 
 .logo .logo-go {
-  color: var(--accent);
+  color: var(--accent-2);
 }
 
 .header-nav {
@@ -222,7 +222,16 @@ svg {
 .hero .app-name {
   display: inline-block;
   font-family: var(--font-display);
-  color: var(--accent);
+  color: var(--accent-2);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+.hero .app-name2 {
+  display: inline-block;
+  font-family: var(--font-display);
+  color: var(--text);
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -393,7 +402,7 @@ svg {
 }
 
 .pricing-card.featured {
-  border-color: var(--accent);
+  border-color: limegreen;
 }
 
 .pricing-badge {
@@ -401,7 +410,7 @@ svg {
   top: -0.8rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent);
+  background: limegreen;
   color: #fff;
   font-family: var(--font-display);
   font-size: 0.8rem;
