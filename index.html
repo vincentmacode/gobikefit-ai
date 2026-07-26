@@ -17,6 +17,12 @@
   <meta property="og:image" content="https://gobikefit.com/og-image.png">
   <meta name="theme-color" content="#05080D">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <!-- Hero background is a CSS background-image, so it needs a preload to be fetched
+       early. Breakpoints must match the .hero media query in styles.css. -->
+  <link rel="preload" as="image" href="/assets/hero/dusk-riding-zoom-960.webp" media="(max-width: 699.98px)"
+    fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/hero/dusk-riding-zoom.webp" media="(min-width: 700px)"
+    fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:wght@400;600&display=swap" rel="stylesheet">
