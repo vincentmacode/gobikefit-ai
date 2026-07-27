@@ -16,6 +16,7 @@ favicon-96x96.png                        Tab icon, high-DPI
 apple-touch-icon.png                     iOS home screen, 180px
 site.webmanifest                         PWA manifest
 web-app-manifest-*.png                   Manifest icons, 192/512px
+og-image.png                             Social card, 1200×630
 assets/hero/                             Landing-page hero background
 ```
 
@@ -59,9 +60,8 @@ python3 -m http.server 8000
   with the real App Store link (appears in every page's header, hero, pricing,
   and footer).
 - **Domain**: `https://gobikefit.com` is used in canonical + Open Graph tags on
-  all four pages — replace with the real domain.
-- **OG image**: `index.html` references `og-image.png` (1200×630) — add one at
-  the site root.
+  all four pages — replace with the real domain. Note `og:image` must stay an
+  *absolute* URL, so the social card stays broken until this is done.
 
 The Terms of Use entity (`Guo Rong Ma`) and governing law (`Ontario, Canada`) are
 filled in, and both legal texts are final. No bracket placeholders remain in any

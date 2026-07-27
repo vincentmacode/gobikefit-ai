@@ -32,8 +32,9 @@ host resolves natively.
 
 **The consequence that matters: the `<head>` block, `.site-header`, and `.site-footer` markup
 are duplicated verbatim across all four files.** Anything touching nav links, the footer,
-favicons, `theme-color`, or fonts must be applied four times, or the pages silently drift
-apart. Grep before editing to confirm you have every copy.
+favicons, `theme-color`, fonts, or the Open Graph / Twitter card tags must be applied four
+times, or the pages silently drift apart. Grep before editing to confirm you have every copy
+— `og:image` was on the landing page alone for a while precisely because of this.
 
 `styles.css` is the single shared stylesheet for all pages. Design tokens live in `:root`
 (`--bg`, `--surface`, `--text`, `--accent` blue, `--accent-2` orange, radii, font stacks) —
@@ -69,8 +70,9 @@ wrapper (1228 KB); the `.ico` and 96px PNG cover every tab size. Manifest icons 
 
 **Pre-launch placeholders still in the markup**: the App Store URL
 (`https://apps.apple.com/app/id0000000000`, 12 occurrences across every page's header and
-footer plus the landing hero and pricing), the `gobikefit.com` domain in canonical/OG tags,
-and a missing `og-image.png`. `README.md` tracks these. The legal texts are final — entity
+footer plus the landing hero and pricing) and the `gobikefit.com` domain in canonical/OG
+tags. `README.md` tracks these. Because `og:image` must be an absolute URL, the social card
+stays broken until the domain is real. The legal texts are final — entity
 and governing law are filled in, and no bracket placeholders remain anywhere.
 
 ## Git workflow
