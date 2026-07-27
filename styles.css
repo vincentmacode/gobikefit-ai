@@ -12,12 +12,8 @@
   --accent-soft: rgba(245, 91, 21, 0.12);
   --accent-2: #f55b15;
   --accent-2-soft: rgba(245, 91, 21, 0.12);
-  /* The original blue, kept for the icon circles so the features grid still
-     alternates blue/orange the way it did before the accent flip. */
   --accent-blue: #208aef;
   --accent-blue-soft: rgba(32, 138, 239, 0.12);
-  /* Apple's App Store blue — deliberately outside the brand accent scale so the
-     store CTA reads as the App Store, not as a GoBikeFit button. */
   --appstore: #0a84ff;
   --appstore-hover: #3b9af1;
   --radius: 14px;
@@ -107,12 +103,57 @@ svg {
 .site-header {
   position: sticky;
   top: 0;
-  /* Above the 9000 film grain in depth.css — keep the two in sync. */
   z-index: 9500;
-  background: rgba(5, 8, 13, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+}
+
+/* Blur ramp below the header. The bands compound — ::after paints later, so
+   ::before's output is already in its backdrop. Keep ::before the taller one. */
+.site-header::before,
+.site-header::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+  mask-image: linear-gradient(to bottom, #000, transparent);
+}
+
+/* Wide, gentle tail. The gradient seats the lip against pale backdrops. */
+.site-header::before {
+  height: 24px;
+  -webkit-backdrop-filter: blur(13px);
+  backdrop-filter: blur(13px);
+  background: linear-gradient(to bottom, rgba(5, 8, 13, 0.35), transparent);
+}
+
+/* Tight band, plus the lip. An element's own border composites on top of its
+   backdrop-filter, so this hairline stays crisp however hard the band warps. */
+.site-header::after {
+  height: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+/* Refraction. Chromium only — backdrop-filter: url() is unsupported in Safari
+   (WebKit 245510) and Firefox, which keep the blur above. No -webkit- twin on
+   purpose: it leaves Safari on the prefixed blur. Filter is inlined per page. */
+@supports (backdrop-filter: url("#edge-warp")) {
+  .site-header::after {
+    height: 28px;
+    backdrop-filter: url("#edge-warp") blur(1px);
+  }
+}
+
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 .site-header .container {
