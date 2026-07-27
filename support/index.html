@@ -29,6 +29,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/depth.css">
+  <!-- Not deferred: sets the .js class before first paint so depth.css can
+       hide .reveal elements without risking a blank page if JS fails. -->
+  <script src="/depth.js"></script>
 </head>
 
 <body>
@@ -45,7 +49,7 @@
 
   <main class="container">
 
-    <section class="page-hero">
+    <section class="page-hero reveal">
       <h1>Support</h1>
       <p>Answers to common questions. Can't find what you need? Email us — we read everything.</p>
     </section>
@@ -53,7 +57,7 @@
     <section aria-label="Frequently asked questions">
       <div class="faq-list">
 
-        <details class="faq-item">
+        <details class="faq-item reveal" style="--i:0">
           <summary>How do I take the two photos?</summary>
           <div class="faq-answer">
             <p>Set your bike on a trainer or have someone hold it steady, then have a friend photograph you from a true
@@ -64,7 +68,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item reveal" style="--i:1">
           <summary>What do the recommendations mean?</summary>
           <div class="faq-answer">
             <p>GoBikeFit compares your measured joint angles against ranges used in professional bike fitting. Each
@@ -75,7 +79,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item reveal" style="--i:2">
           <summary>How do I manage or cancel my subscription?</summary>
           <div class="faq-answer">
             <p>Subscriptions are managed by Apple. On your iPhone, open <strong>Settings&nbsp;→ your name&nbsp;→
@@ -84,7 +88,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item reveal" style="--i:3">
           <summary>How do I restore a previous purchase?</summary>
           <div class="faq-answer">
             <p>If you've reinstalled the app or switched to a new iPhone, open GoBikeFit and tap <strong>Restore
@@ -93,7 +97,7 @@
           </div>
         </details>
 
-        <details class="faq-item">
+        <details class="faq-item reveal" style="--i:4">
           <summary>Can I get a refund?</summary>
           <div class="faq-answer">
             <p>Refunds for App Store purchases are handled by Apple, not by us. You can request one at <a
@@ -105,7 +109,7 @@
       </div>
     </section>
 
-    <section class="contact-block" id="contact">
+    <section class="contact-block reveal" id="contact">
       <h2>Contact</h2>
       <p class="muted">For anything else — questions, bug reports, or feedback — email <a
           href="mailto:vincentma.code@gmail.com">vincentma.code@gmail.com</a>.</p>

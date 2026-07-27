@@ -35,6 +35,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/depth.css">
+  <!-- Not deferred: sets the .js class before first paint so depth.css can
+       hide .reveal elements without risking a blank page if JS fails. -->
+  <script src="/depth.js"></script>
 </head>
 
 <body>
@@ -80,7 +84,7 @@
           <p>Three steps. No sensors, no appointments, no guesswork.</p>
         </div>
         <div class="steps-grid">
-          <div class="card">
+          <div class="card reveal" style="--i:0">
             <div class="step-number">Step 1</div>
             <div class="icon-circle">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -93,7 +97,7 @@
             <p class="card-body">Shoot a true side view on your bike — one with the pedal at 6&nbsp;o'clock, one at
               3&nbsp;o'clock.</p>
           </div>
-          <div class="card">
+          <div class="card reveal" style="--i:1">
             <div class="step-number">Step 2</div>
             <div class="icon-circle">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -110,7 +114,7 @@
             <p class="card-body">GoBikeFit measures your knee bend, torso lean, elbow angle, and knee-over-pedal
               position.</p>
           </div>
-          <div class="card">
+          <div class="card reveal" style="--i:2">
             <div class="step-number">Step 3</div>
             <div class="icon-circle">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -134,7 +138,7 @@
           <p>The adjustments that matter most for comfort, power, and injury prevention.</p>
         </div>
         <div class="features-grid">
-          <div class="card">
+          <div class="card reveal" style="--i:0">
             <div class="icon-circle">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" aria-hidden="true">
@@ -146,7 +150,7 @@
             <h3>Saddle height</h3>
             <p class="card-body">Dial in the knee bend that keeps you powerful and pain-free.</p>
           </div>
-          <div class="card">
+          <div class="card reveal" style="--i:1">
             <div class="icon-circle orange">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" aria-hidden="true">
@@ -158,7 +162,7 @@
             <h3>Reach &amp; drop</h3>
             <p class="card-body">Balance torso lean and elbow angle for a sustainable position.</p>
           </div>
-          <div class="card">
+          <div class="card reveal" style="--i:2">
             <div class="icon-circle">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" aria-hidden="true">
@@ -173,7 +177,7 @@
             <h3>Cleat position</h3>
             <p class="card-body">Check knee-over-pedal-spindle (KOPS) alignment at 3&nbsp;o'clock.</p>
           </div>
-          <div class="card">
+          <div class="card reveal" style="--i:3">
             <div class="icon-circle orange">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" aria-hidden="true">
@@ -191,7 +195,7 @@
     <!-- Privacy -->
     <section class="section" id="privacy">
       <div class="container">
-        <div class="privacy-callout">
+        <div class="privacy-callout reveal">
           <div class="icon-circle">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" aria-hidden="true">
@@ -214,18 +218,18 @@
           <p>Pick the plan that fits. Prices are shown in the app, localized for your region.</p>
         </div>
         <div class="pricing-grid">
-          <div class="card pricing-card">
+          <div class="card pricing-card reveal" style="--i:0">
             <div class="plan-name">Monthly</div>
             <p class="plan-desc">Full access, billed monthly. Perfect for dialing in a new bike.</p>
             <a class="plan-cta secondary" href="https://apps.apple.com/app/id0000000000">Get the app</a>
           </div>
-          <div class="card pricing-card featured">
+          <div class="card pricing-card featured reveal" style="--i:1">
             <div class="pricing-badge">Best value</div>
             <div class="plan-name">Annual</div>
             <p class="plan-desc">Full access for a year. Re-fit through every season and setup change.</p>
             <a class="plan-cta" href="https://apps.apple.com/app/id0000000000">Get the app</a>
           </div>
-          <div class="card pricing-card">
+          <div class="card pricing-card reveal" style="--i:2">
             <div class="plan-name">Lifetime</div>
             <p class="plan-desc">One-time purchase. Every feature, every future update, forever.</p>
             <a class="plan-cta secondary" href="https://apps.apple.com/app/id0000000000">Get the app</a>

@@ -1,7 +1,8 @@
 # GoBikeFit — marketing site
 
 Static marketing site for the GoBikeFit iOS app. Plain HTML/CSS, no build step,
-no JavaScript, no forms, no cookies, no analytics.
+no framework, no forms, no cookies, no analytics. The only JavaScript is
+`depth.js`, ~15 lines driving the scroll reveal.
 
 ## Structure
 
@@ -10,7 +11,9 @@ index.html              /                Landing page
 support/index.html      /support         FAQ + contact
 legal/terms/index.html  /legal/terms     Terms of Use
 legal/privacy/index.html/legal/privacy   Privacy Policy
-styles.css                               Shared stylesheet
+styles.css                               Shared stylesheet (base)
+depth.css                                Shared stylesheet (depth layer, loads second)
+depth.js                                 Scroll-reveal observer
 favicon.ico                              Tab icon, 16/32/48px
 favicon-96x96.png                        Tab icon, high-DPI
 apple-touch-icon.png                     iOS home screen, 180px
@@ -46,6 +49,52 @@ file and paint the other.
 Clean URLs work out of the box on any static host that serves
 `directory/index.html` for `/directory` (Netlify, Vercel, Cloudflare Pages,
 GitHub Pages, S3 + CloudFront with index documents).
+
+## Depth layer
+
+`depth.css` sits on top of `styles.css` and must load second — it overrides `.card`,
+so reversing the order silently drops the elevation treatment. It adds five things:
+
+1. **Film grain** — a fixed `body::after` overlay at 3.5% opacity, using an inline
+   `feTurbulence` SVG data URI. This is what stops flat dark from reading as
+   unfinished; it also kills banding in the hero gradient.
+2. **Card elevation** — cards lighten and rise 2px on hover, wrapped in
+   `@media (hover: hover)` so the state can't stick after a tap on touch devices.
+   `.pricing-card.featured:hover` re-asserts the green border, which the generic
+   `.card:hover` would otherwise win on source order at equal specificity.
+3. **Hairlines** — translucent white borders instead of the opaque `--border`.
+   The `.rule` utility (a divider that fades out at both ends) is defined but not
+   currently placed on any page.
+4. **Scroll reveal** — see below.
+
+**Grain z-index and header z-index are a pair.** Grain is `9000`; `.site-header` is
+`9500` so the sticky header stays above it. Nothing else on the site exceeds 10.
+
+**Keep the page background flat.** A per-section ambient glow was built and then
+removed. Each radial gradient was clipped to its section box, so it ended in a hard
+horizontal edge — one visible seam where the hero gradient met the first section,
+another below pricing. The hero photo is designed to blend into flat `#05080d`;
+don't reintroduce anything that tints the space between sections. `.section` still
+carries `position: relative` and `isolation: isolate`, kept by request but inert
+now that there is no `z-index: -1` child to contain.
+
+### Scroll reveal
+
+`depth.js` is an IntersectionObserver that adds `.is-visible` to each `.reveal`
+element once, then unobserves it. Grouped items stagger via an inline index —
+`<div class="card reveal" style="--i:0">` — which feeds a 60ms-per-step
+`transition-delay`. Restart the index at 0 for each group.
+
+The reveal **fails closed**. `depth.css` hides `.reveal` only under a `.js` class
+that `depth.js` puts on `<html>`, so a missing or blocked script leaves everything
+visible instead of blank. That is why the script is loaded **without `defer`** — the
+class has to land before first paint, or you get a flash of content followed by a
+hide. It is also gated on `prefers-reduced-motion`.
+
+Don't put `.reveal` on anything much taller than the viewport. `threshold: 0.15`
+can never be satisfied by an element more than ~6.7 viewport-heights tall, and it
+would stay hidden forever. The legal pages reveal `.page-hero` and deliberately
+leave `.prose` alone for exactly this reason.
 
 ## Preview locally
 

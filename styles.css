@@ -8,10 +8,18 @@
   --border: #1d2530;
   --text: #e6edf3;
   --text-secondary: #aeaeb2;
-  --accent: #208aef;
-  --accent-soft: rgba(32, 138, 239, 0.12);
+  --accent: #f55b15;
+  --accent-soft: rgba(245, 91, 21, 0.12);
   --accent-2: #f55b15;
   --accent-2-soft: rgba(245, 91, 21, 0.12);
+  /* The original blue, kept for the icon circles so the features grid still
+     alternates blue/orange the way it did before the accent flip. */
+  --accent-blue: #208aef;
+  --accent-blue-soft: rgba(32, 138, 239, 0.12);
+  /* Apple's App Store blue — deliberately outside the brand accent scale so the
+     store CTA reads as the App Store, not as a GoBikeFit button. */
+  --appstore: #0a84ff;
+  --appstore-hover: #3b9af1;
   --radius: 14px;
   --radius-sm: 12px;
   --font-display: "Sour Gummy", system-ui, sans-serif;
@@ -99,7 +107,8 @@ svg {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
+  /* Above the 9000 film grain in depth.css — keep the two in sync. */
+  z-index: 9500;
   background: rgba(5, 8, 13, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -152,7 +161,7 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: var(--accent);
+  background: var(--appstore);
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
@@ -163,7 +172,7 @@ svg {
 
 .btn-store-small:hover {
   text-decoration: none;
-  background: #3b9af1;
+  background: var(--appstore-hover);
 }
 
 /* --------------------------------------------------------------------------
@@ -346,8 +355,8 @@ svg {
   width: 3rem;
   height: 3rem;
   border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
   margin-bottom: 1.1rem;
 }
 
@@ -461,12 +470,16 @@ svg {
 
 .pricing-card .plan-cta:hover {
   text-decoration: none;
-  background: #3b9af1;
+  background: #ff7333;
 }
 
+/* Monthly and Lifetime fill with brand orange on hover. Wins over the rule
+   above on specificity, so they land on --accent while the featured Annual
+   button — already --accent at rest — lightens to #ff7333 instead. */
 .pricing-card .plan-cta.secondary:hover {
-  background: var(--surface);
+  background: var(--accent);
   border-color: var(--accent);
+  color: #fff;
 }
 
 .pricing-note {
