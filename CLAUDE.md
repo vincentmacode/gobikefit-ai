@@ -34,8 +34,9 @@ host resolves natively.
 
 **The consequence that matters: the `<head>` block, `.site-header`, and `.site-footer` markup
 are duplicated verbatim across all four files.** Anything touching nav links, the footer,
-favicons, `theme-color`, fonts, the `styles.css` / `depth.css` / `depth.js` tags, or the Open
-Graph / Twitter card tags must be applied four times, or the pages silently drift apart. Grep
+favicons, `theme-color`, fonts, the `styles.css` / `depth.css` / `depth.js` tags, the
+`.svg-defs` filter block after `<body>`, or the Open Graph / Twitter card tags must be applied
+four times, or the pages silently drift apart. Grep
 before editing to confirm you have every copy — `og:image` was on the landing page alone for
 a while precisely because of this.
 

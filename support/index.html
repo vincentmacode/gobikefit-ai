@@ -37,6 +37,16 @@
 
 <body>
 
+  <!-- Header edge refraction (styles.css). Duplicated on all four pages —
+       a CSS url(#id) resolves only within its own document. Keep in sync. -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <filter id="edge-warp" x="-25%" y="-100%" width="150%" height="300%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.05" numOctaves="2" seed="9" result="noise" />
+      <feGaussianBlur in="noise" stdDeviation="1.2" result="soft" />
+      <feDisplacementMap in="SourceGraphic" in2="soft" scale="34" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
   <header class="site-header">
     <div class="container">
       <a class="logo" href="/"><span class="logo-go">Go</span>BikeFit</a>

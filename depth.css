@@ -5,17 +5,14 @@
    ========================================================================== */
 
 :root {
-  /* Only the tokens this layer introduces. --bg, --surface and --accent are
-     defined once, in styles.css. */
+  /* Only this layer's tokens; the base set lives in styles.css. */
   --surface-hover: #101823;
   --hairline: rgba(255, 255, 255, 0.06);
   --hairline-strong: rgba(255, 255, 255, 0.11);
 }
 
 /* --------------------------------------------------------------------------
-   1. Film grain
-   Kills gradient banding and stops flat dark reading as unfinished.
-   z-index 9000 sits under .site-header (9500) so the header stays clean.
+   1. Film grain — z-index 9000 pairs with .site-header at 9500.
    -------------------------------------------------------------------------- */
 
 body::after {
@@ -30,8 +27,6 @@ body::after {
 
 /* --------------------------------------------------------------------------
    2. Elevation
-   Cards lift off the page base by ~6 points of luminance. Barely visible
-   alone, transformative across a whole section.
    -------------------------------------------------------------------------- */
 
 .card {
@@ -48,32 +43,25 @@ body::after {
     transform: translateY(-2px);
   }
 
-  /* .card:hover and .pricing-card.featured tie on specificity and this file
-     loads later, so without this the featured card loses its border on hover. */
+  /* Ties with .card:hover on specificity; this file loads later. */
   .pricing-card.featured:hover {
     border-color: limegreen;
   }
 }
 
 /* --------------------------------------------------------------------------
-   3. Ambient brand glow — removed.
-   The radial gradients were bounded by the section box, so each one ended in a
-   hard horizontal edge: a visible seam where the hero's gradient met the first
-   section, and another under the pricing section. The page stays flat --bg
-   dark, which is what the hero photo blends into.
+   3. Ambient glow — removed. Section-bounded gradients left a hard seam at the
+   hero handoff and under pricing. Keep the page background flat.
    -------------------------------------------------------------------------- */
 
 .section {
   position: relative;
-  /* Retained by request. Nothing currently uses the stacking context it makes
-     — it existed to stop the z-index: -1 glow falling behind the page
-     background, and that glow is gone. */
+  /* Kept by request; inert since the glow was removed. */
   isolation: isolate;
 }
 
 /* --------------------------------------------------------------------------
-   4. Hairline divider that fades at both ends — never a full-width border.
-   Available as a utility; not currently placed in any page.
+   4. Hairline divider. Utility — not currently used on any page.
    -------------------------------------------------------------------------- */
 
 .rule {
@@ -89,9 +77,8 @@ body::after {
 }
 
 /* --------------------------------------------------------------------------
-   5. Scroll reveal — 12px rise, staggered via an inline --i index.
-   Gated on .js (set by depth.js before first paint) so a script that fails to
-   load can never leave a page blank, and on prefers-reduced-motion.
+   5. Scroll reveal — staggered by an inline --i index. Gated on .js so a
+   script that fails to load can never leave a page blank.
    -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -99,11 +86,8 @@ body::after {
     opacity: 0;
   }
 
-  /* An animation rather than a transition, because .card.reveal matches both
-     .card and this rule: a `transition` shorthand here is more specific and
-     would reset .card's own transition, making the hover background and border
-     snap instantly and stretching the 2px lift to 0.6s. `backwards` fill covers
-     the stagger delay, then releases transform so :hover behaves normally. */
+  /* Animation, not transition: a transition here outspecifies .card's own and
+     would reset it. `backwards` fills the delay, then releases transform. */
   .js .reveal.is-visible {
     opacity: 1;
     animation: reveal-rise 0.6s ease backwards;
