@@ -1,0 +1,124 @@
+/* ==========================================================================
+   GoBikeFit — depth layer
+   Grain, elevation, ambient glow, hairlines, scroll reveal.
+   Loads *after* styles.css and overrides .card — keep that order in the head.
+   ========================================================================== */
+
+:root {
+  /* Only the tokens this layer introduces. --bg, --surface and --accent are
+     defined once, in styles.css. */
+  --surface-hover: #101823;
+  --hairline: rgba(255, 255, 255, 0.06);
+  --hairline-strong: rgba(255, 255, 255, 0.11);
+}
+
+/* --------------------------------------------------------------------------
+   1. Film grain
+   Kills gradient banding and stops flat dark reading as unfinished.
+   z-index 9000 sits under .site-header (9500) so the header stays clean.
+   -------------------------------------------------------------------------- */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   2. Elevation
+   Cards lift off the page base by ~6 points of luminance. Barely visible
+   alone, transformative across a whole section.
+   -------------------------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    background: var(--surface-hover);
+    border-color: var(--hairline-strong);
+    transform: translateY(-2px);
+  }
+
+  /* .card:hover and .pricing-card.featured tie on specificity and this file
+     loads later, so without this the featured card loses its border on hover. */
+  .pricing-card.featured:hover {
+    border-color: limegreen;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Ambient brand glow — removed.
+   The radial gradients were bounded by the section box, so each one ended in a
+   hard horizontal edge: a visible seam where the hero's gradient met the first
+   section, and another under the pricing section. The page stays flat --bg
+   dark, which is what the hero photo blends into.
+   -------------------------------------------------------------------------- */
+
+.section {
+  position: relative;
+  /* Retained by request. Nothing currently uses the stacking context it makes
+     — it existed to stop the z-index: -1 glow falling behind the page
+     background, and that glow is gone. */
+  isolation: isolate;
+}
+
+/* --------------------------------------------------------------------------
+   4. Hairline divider that fades at both ends — never a full-width border.
+   Available as a utility; not currently placed in any page.
+   -------------------------------------------------------------------------- */
+
+.rule {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hairline-strong) 50%,
+    transparent
+  );
+}
+
+/* --------------------------------------------------------------------------
+   5. Scroll reveal — 12px rise, staggered via an inline --i index.
+   Gated on .js (set by depth.js before first paint) so a script that fails to
+   load can never leave a page blank, and on prefers-reduced-motion.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+  }
+
+  /* An animation rather than a transition, because .card.reveal matches both
+     .card and this rule: a `transition` shorthand here is more specific and
+     would reset .card's own transition, making the hover background and border
+     snap instantly and stretching the 2px lift to 0.6s. `backwards` fill covers
+     the stagger delay, then releases transform so :hover behaves normally. */
+  .js .reveal.is-visible {
+    opacity: 1;
+    animation: reveal-rise 0.6s ease backwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Static marketing site for the GoBikeFit iOS app. Plain HTML/CSS: **no build step, no
-JavaScript anywhere, no forms, no cookies, no analytics, no dependencies.** There is nothing
-to install, compile, bundle, or test. Files are served exactly as they sit in the repo.
+Static marketing site for the GoBikeFit iOS app. Plain HTML/CSS plus **one** small script:
+**no build step, no framework, no forms, no cookies, no analytics, no dependencies.** The
+only JavaScript is `depth.js` (~15 lines, the scroll-reveal observer) — do not add more
+without a reason as good. There is nothing to install, compile, bundle, or test. Files are
+served exactly as they sit in the repo.
 
 Preview locally:
 
@@ -32,14 +34,36 @@ host resolves natively.
 
 **The consequence that matters: the `<head>` block, `.site-header`, and `.site-footer` markup
 are duplicated verbatim across all four files.** Anything touching nav links, the footer,
-favicons, `theme-color`, fonts, or the Open Graph / Twitter card tags must be applied four
-times, or the pages silently drift apart. Grep before editing to confirm you have every copy
-— `og:image` was on the landing page alone for a while precisely because of this.
+favicons, `theme-color`, fonts, the `styles.css` / `depth.css` / `depth.js` tags, or the Open
+Graph / Twitter card tags must be applied four times, or the pages silently drift apart. Grep
+before editing to confirm you have every copy — `og:image` was on the landing page alone for
+a while precisely because of this.
 
-`styles.css` is the single shared stylesheet for all pages. Design tokens live in `:root`
-(`--bg`, `--surface`, `--text`, `--accent` blue, `--accent-2` orange, radii, font stacks) —
-use them rather than hardcoding hex values. The site is dark-themed throughout; `--bg` is
-`#05080d` and the `theme-color` meta matches it.
+Two stylesheets, shared by all pages. `styles.css` is the base; **`depth.css` layers on top
+and must load second** — it overrides `.card`, so swapping the order silently drops the
+elevation treatment. Design tokens live in `styles.css`'s `:root` (`--bg`, `--surface`,
+`--text`, `--accent`, `--accent-2`, radii, font stacks); `depth.css` adds only its own
+(`--surface-hover`, `--hairline`, `--hairline-strong`, `--accent-glow`) and deliberately does
+not redeclare the base ones. Use tokens rather than hardcoding hex values. The site is
+dark-themed throughout; `--bg` is `#05080d` and the `theme-color` meta matches it.
+
+**`--accent` and `--accent-2` are both `#f55b15` orange.** The site was blue-accented
+(`#208aef`) until the depth layer landed; the flip was deliberate and site-wide. Three things
+were then walked back to blue on purpose, and each has its own token so they don't drift:
+
+- `--accent-blue` (`#208aef`) drives `.icon-circle`, which keeps the features grid alternating
+  against `.icon-circle.orange` and keeps the steps and privacy-lock icons blue. Do not
+  collapse it into `--accent`.
+- `--appstore` (`#0a84ff`) — see below.
+
+Everything else that reads `var(--accent)` is orange by design: body links, the pricing CTAs,
+and the FAQ `+` marker.
+
+**`--appstore` (`#0a84ff`) is intentionally outside that scale.** The header's
+`.btn-store-small` uses Apple's App Store blue rather than `--accent`, so the store CTA reads
+as the App Store instead of as a GoBikeFit button. Do not "fix" it to match the brand accent.
+The hero's `.appstore-badge` stays black, which is what Apple's badge guidelines require —
+blue is not an approved badge treatment.
 
 Two page archetypes share the same chrome: `.hero` (landing page only, centered, with the
 background photo) and `.page-hero` (subpages, left-aligned, plain). `.container`, `.card`,
@@ -67,6 +91,26 @@ and a narrower file would be upscaled and look soft. Regeneration commands are i
 wrapper (1228 KB); the `.ico` and 96px PNG cover every tab size. Manifest icons are
 `"purpose": "any"`, not `"maskable"`, because the artwork has no safe-zone padding. Don't
 "restore" either without reading the Favicons section of `README.md` first.
+
+**The grain and the header are a z-index pair.** The film grain is `body::after` at
+`z-index: 9000` in `depth.css`; `.site-header` sits at `9500` in `styles.css` so the sticky
+header paints above it. Nothing else on the site uses a z-index over 10. Move one and you
+must move the other.
+
+**The page background is flat `--bg` on purpose.** An ambient per-section glow was tried and
+removed: because each radial gradient was clipped to its section box, it terminated in a hard
+horizontal edge — a visible seam where the hero's gradient handed off to the first section,
+and another beneath pricing. Nothing should tint or gradient the space between sections; the
+hero photo is meant to blend into flat `#05080d`. `.section` keeps `position: relative` and
+`isolation: isolate`, retained by request but currently inert.
+
+**The scroll reveal fails closed, deliberately.** `depth.css` hides `.reveal` elements only
+under a `.js` class that `depth.js` sets on `<html>`, and the script is loaded **without
+`defer`** so that class lands before first paint. If JS is disabled or the file 404s, nothing
+is ever hidden. Two consequences: don't add `defer` (you get a flash of content, then a hide),
+and don't put `.reveal` on anything much taller than the viewport — the observer's
+`threshold: 0.15` becomes unreachable for tall elements, which is why the legal pages reveal
+`.page-hero` but not `.prose`.
 
 **Pre-launch placeholders still in the markup**: the App Store URL
 (`https://apps.apple.com/app/id0000000000`, 12 occurrences across every page's header and

@@ -27,6 +27,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/depth.css">
+  <!-- Not deferred: sets the .js class before first paint so depth.css can
+       hide .reveal elements without risking a blank page if JS fails. -->
+  <script src="/depth.js"></script>
 </head>
 
 <body>
@@ -43,9 +47,13 @@
 
   <main class="container">
 
-    <section class="page-hero">
+    <section class="page-hero reveal">
       <h1>Terms of Use</h1>
     </section>
+
+    <!-- .prose deliberately has no .reveal: the article is taller than the
+         observer's 0.15 threshold can ever satisfy on a narrow viewport, which
+         would leave the legal text permanently hidden. See README. -->
 
     <article class="prose">
       <p class="muted legal-updated">Last updated: July 23, 2026</p>
