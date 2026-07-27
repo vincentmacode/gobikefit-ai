@@ -11,7 +11,11 @@ support/index.html      /support         FAQ + contact
 legal/terms/index.html  /legal/terms     Terms of Use (placeholder text)
 legal/privacy/index.html/legal/privacy   Privacy Policy (placeholder text)
 styles.css                               Shared stylesheet
-favicon.svg                              Placeholder favicon
+favicon.ico                              Tab icon, 16/32/48px
+favicon-96x96.png                        Tab icon, high-DPI
+apple-touch-icon.png                     iOS home screen, 180px
+site.webmanifest                         PWA manifest
+web-app-manifest-*.png                   Manifest icons, 192/512px
 assets/hero/                             Landing-page hero background
 ```
 
@@ -61,4 +65,20 @@ python3 -m http.server 8000
   (§11 Governing Law) — fill these in. (Both legal texts are otherwise final.)
 - **OG image**: `index.html` references `og-image.png` (1200×630) — add one at
   the site root.
-- **Favicon**: `favicon.svg` is a placeholder; swap in final app-icon artwork.
+
+## Favicons
+
+Generated with [RealFaviconGenerator](https://realfavicongenerator.net). Two
+deliberate departures from its default output:
+
+- **No `favicon.svg`.** The generator's SVG is not a vector — it is a 1024×1024
+  PNG base64-embedded in an `<svg>` wrapper, 1228 KB, or 122× `favicon-96x96.png`.
+  Browsers prefer the SVG when it is offered, so linking it would cost every
+  visitor over a megabyte for a 16px tab icon with no gain in crispness. The
+  `.ico` (16/32/48) and the 96px PNG cover every tab size, including high-DPI.
+  If the artwork is ever redrawn as a true vector, add it back — an SVG favicon
+  is the right call when it is actually one.
+- **Manifest icons are `"purpose": "any"`, not `"maskable"`.** Maskable icons
+  need roughly 20% safe-zone padding; this artwork runs edge to edge, so Android
+  would crop the wheels when applying its circle mask. Switch back to
+  `"maskable"` only alongside a padded variant of the artwork.
