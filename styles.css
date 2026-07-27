@@ -428,32 +428,17 @@ svg {
    Privacy callout
    -------------------------------------------------------------------------- */
 
-/* Same treatment as .hero, but opaque --bg at both ends instead of only the
-   bottom — a mid-page band hands off to the flat background twice, and any
-   residual tint at either edge shows up as a seam. */
+
 .section--privacy {
   --privacy-img: url("/assets/private/dawn-empty-road-960.webp");
-  /* Deep top padding drops the callout down the frame so the sunrise — about
-     30% down the image — clears it. The scrim stays light through that band and
-     only deepens behind the card. */
-  padding-top: 13rem;
-  padding-bottom: 7rem;
   background: linear-gradient(
       to bottom,
       #05080d 0%,
-      rgba(5, 8, 13, 0.3) 16%,
-      rgba(5, 8, 13, 0.6) 46%,
-      #05080d 96%
+      rgba(5, 8, 13, 0.6) 30%,
+      rgba(5, 8, 13, 0.6) 70%,
+      #05080d 100%
     ),
-    var(--privacy-img) center 45% / cover no-repeat;
-}
-
-/* Under 700px cover scales by height, so there is no vertical crop for
-   background-position to move. Zoom past cover to create one. */
-@media (max-width: 699.98px) {
-  .section--privacy {
-    background-size: auto, auto 150%;
-  }
+    var(--privacy-img) center 0% / cover no-repeat;
 }
 
 @media (min-width: 700px) {
