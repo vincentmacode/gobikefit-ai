@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 Guo Rong Ma
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+SCOPE
+
+The MIT grant above applies to the source code of this repository: the HTML
+markup, CSS, and JavaScript.
+
+It does NOT apply to, and all rights are reserved in:
+
+  - all images under assets/
+  - og-image.png
+  - favicon.ico, favicon-96x96.png, apple-touch-icon.png, and
+    web-app-manifest-192x192.png / web-app-manifest-512x512.png
+  - the GoBikeFit name, wordmark, and logo
+  - the Terms of Use and Privacy Policy texts under legal/
