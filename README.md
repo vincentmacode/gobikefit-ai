@@ -8,8 +8,8 @@ no JavaScript, no forms, no cookies, no analytics.
 ```
 index.html              /                Landing page
 support/index.html      /support         FAQ + contact
-legal/terms/index.html  /legal/terms     Terms of Use (placeholder text)
-legal/privacy/index.html/legal/privacy   Privacy Policy (placeholder text)
+legal/terms/index.html  /legal/terms     Terms of Use
+legal/privacy/index.html/legal/privacy   Privacy Policy
 styles.css                               Shared stylesheet
 favicon.ico                              Tab icon, 16/32/48px
 favicon-96x96.png                        Tab icon, high-DPI
@@ -60,11 +60,12 @@ python3 -m http.server 8000
   and footer).
 - **Domain**: `https://gobikefit.com` is used in canonical + Open Graph tags on
   all four pages — replace with the real domain.
-- **Terms of Use entity details**: `legal/terms/index.html` still contains
-  `[Your Legal Name / Company Name]` (intro paragraph) and `[Your State/Country]`
-  (§11 Governing Law) — fill these in. (Both legal texts are otherwise final.)
 - **OG image**: `index.html` references `og-image.png` (1200×630) — add one at
   the site root.
+
+The Terms of Use entity (`Guo Rong Ma`) and governing law (`Ontario, Canada`) are
+filled in, and both legal texts are final. No bracket placeholders remain in any
+page.
 
 ## Favicons
 

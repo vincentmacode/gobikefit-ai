@@ -68,9 +68,10 @@ wrapper (1228 KB); the `.ico` and 96px PNG cover every tab size. Manifest icons 
 "restore" either without reading the Favicons section of `README.md` first.
 
 **Pre-launch placeholders still in the markup**: the App Store URL
-(`https://apps.apple.com/app/id0000000000`, in every page's header and footer plus the
-landing hero and pricing), the `gobikefit.com` domain in canonical/OG tags, legal entity
-details in `legal/terms/index.html`, and a missing `og-image.png`. `README.md` tracks these.
+(`https://apps.apple.com/app/id0000000000`, 12 occurrences across every page's header and
+footer plus the landing hero and pricing), the `gobikefit.com` domain in canonical/OG tags,
+and a missing `og-image.png`. `README.md` tracks these. The legal texts are final — entity
+and governing law are filled in, and no bracket placeholders remain anywhere.
 
 ## Git workflow
 
