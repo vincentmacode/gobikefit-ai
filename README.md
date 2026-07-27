@@ -21,12 +21,14 @@ site.webmanifest                         PWA manifest
 web-app-manifest-*.png                   Manifest icons, 192/512px
 og-image.png                             Social card, 1200×630
 assets/hero/                             Landing-page hero background
+assets/private/                          Privacy-section background
 ```
 
-## Hero background
+## Background photos
 
-`assets/hero/dusk-riding-zoom.png` (1584×672) is the master; the two committed `.webp`
-files beside it are generated derivatives, served as the `.hero` CSS background.
+Two sets, same shape and same pipeline: `assets/hero/dusk-riding-zoom.png` behind `.hero`,
+and `assets/private/dawn-empty-road.png` behind `.section--privacy`. Each is a 1584×672
+master with two committed `.webp` derivatives beside it, served as CSS backgrounds.
 
 The hero box is taller than it is wide on phones, so `background-size: cover` scales the
 image by its *height* there — a width-downscaled mobile variant would be upscaled and look
@@ -34,13 +36,15 @@ soft. The mobile file is therefore a centered **crop**, not a smaller rendering 
 frame. Regenerate both with (needs `brew install webp`):
 
 ```sh
-cwebp -q 90 -m 6 -sharp_yuv -metadata none \
-  assets/hero/dusk-riding-zoom.png -o assets/hero/dusk-riding-zoom.webp
+# $1 = e.g. assets/hero/dusk-riding-zoom or assets/private/dawn-empty-road
+cwebp -q 90 -m 6 -sharp_yuv -metadata none "$1.png" -o "$1.webp"
 
-sips -c 672 960 assets/hero/dusk-riding-zoom.png --out /tmp/hero-mobile.png
-cwebp -q 90 -m 6 -sharp_yuv -metadata none \
-  /tmp/hero-mobile.png -o assets/hero/dusk-riding-zoom-960.webp
+sips -c 672 960 "$1.png" --out /tmp/mobile.png
+cwebp -q 90 -m 6 -sharp_yuv -metadata none /tmp/mobile.png -o "$1-960.webp"
 ```
+
+Only the hero is preloaded. The privacy band is below the fold, so preloading it would
+compete with the LCP image.
 
 The 700px breakpoint appears twice — the `.hero` media query in `styles.css` and the two
 `rel="preload"` links in `index.html`. Keep them in sync or the browser will preload one
@@ -70,13 +74,13 @@ so reversing the order silently drops the elevation treatment. It adds five thin
 **Grain z-index and header z-index are a pair.** Grain is `9000`; `.site-header` is
 `9500` so the sticky header stays above it. Nothing else on the site exceeds 10.
 
-**Keep the page background flat.** A per-section ambient glow was built and then
-removed. Each radial gradient was clipped to its section box, so it ended in a hard
-horizontal edge — one visible seam where the hero gradient met the first section,
-another below pricing. The hero photo is designed to blend into flat `#05080d`;
-don't reintroduce anything that tints the space between sections. `.section` still
-carries `position: relative` and `isolation: isolate`, kept by request but inert
-now that there is no `z-index: -1` child to contain.
+**Section backgrounds must reach opaque `--bg` at every edge.** A per-section
+ambient glow was built and then removed: each radial gradient stopped translucent at
+its section box, leaving a hard seam where the hero met the first section and another
+below pricing. The two photo bands are fine because their gradients end at solid
+`#05080d` — `.hero` at the bottom, `.section--privacy` at both ends, since a mid-page
+band hands off to the flat background twice. `.section` still carries `position:
+relative` and `isolation: isolate`, kept by request but inert.
 
 ### Scroll reveal
 

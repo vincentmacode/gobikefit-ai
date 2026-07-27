@@ -98,12 +98,13 @@ wrapper (1228 KB); the `.ico` and 96px PNG cover every tab size. Manifest icons 
 header paints above it. Nothing else on the site uses a z-index over 10. Move one and you
 must move the other.
 
-**The page background is flat `--bg` on purpose.** An ambient per-section glow was tried and
-removed: because each radial gradient was clipped to its section box, it terminated in a hard
-horizontal edge — a visible seam where the hero's gradient handed off to the first section,
-and another beneath pricing. Nothing should tint or gradient the space between sections; the
-hero photo is meant to blend into flat `#05080d`. `.section` keeps `position: relative` and
-`isolation: isolate`, retained by request but currently inert.
+**Section backgrounds must reach opaque `--bg` at every edge.** An ambient per-section glow
+was tried and removed because each radial gradient stopped translucent at its section box,
+leaving a hard horizontal seam where the hero handed off to the first section and another
+beneath pricing. `.hero` and `.section--privacy` are photo bands and are fine precisely
+because their gradients end at solid `#05080d` — the hero at the bottom, the privacy band at
+both ends, since a mid-page band hands off twice. Any residual tint at an edge is a seam.
+`.section` keeps `position: relative` and `isolation: isolate`, retained by request but inert.
 
 **The scroll reveal fails closed, deliberately.** `depth.css` hides `.reveal` elements only
 under a `.js` class that `depth.js` sets on `<html>`, and the script is loaded **without
