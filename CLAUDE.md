@@ -114,12 +114,13 @@ and don't put `.reveal` on anything much taller than the viewport — the observ
 `threshold: 0.15` becomes unreachable for tall elements, which is why the legal pages reveal
 `.page-hero` but not `.prose`.
 
-**Pre-launch placeholders still in the markup**: the App Store URL
-(`https://apps.apple.com/app/id0000000000`, 12 occurrences across every page's header and
-footer plus the landing hero and pricing) and the `gobikefit.com` domain in canonical/OG
-tags. `README.md` tracks these. Because `og:image` must be an absolute URL, the social card
-stays broken until the domain is real. The legal texts are final — entity
-and governing law are filled in, and no bracket placeholders remain anywhere.
+**One pre-launch placeholder is still in the markup**: the `gobikefit.com` domain in the
+canonical/OG tags on all four pages. `README.md` tracks it. Because `og:image` must be an
+absolute URL, the social card stays broken until the domain is real. The App Store URL
+(`https://apps.apple.com/app/id6791359268`, 12 occurrences across every page's header and
+footer plus the landing hero and pricing) is the real one — it 404s only until the app is
+released. The legal texts are final — entity and governing law are filled in, and no bracket
+placeholders remain anywhere.
 
 ## Git workflow
 

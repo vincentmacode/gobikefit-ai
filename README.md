@@ -127,9 +127,6 @@ departures from its default output:
 
 ### Before launch
 
-- **App Store URL** — search-and-replace `https://apps.apple.com/app/id0000000000` with the
-  real link. 12 occurrences across every page's header and footer, plus the landing hero and
-  pricing cards.
 - **Domain** — `https://gobikefit.com` appears in the canonical and Open Graph tags on all four
   pages. `og:image` must stay an *absolute* URL, so the social card stays broken until this is
   real.
