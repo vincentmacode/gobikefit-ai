@@ -7,7 +7,7 @@ Four hand-written HTML pages sharing two stylesheets and one 18-line script. No 
 no framework, no dependencies, no forms, no cookies, no analytics. Files are served exactly
 as they sit in the repo.
 
-![GoBikeFit — a professional bike fit from your pocket](og-image.png)
+[![GoBikeFit — a professional bike fit from your pocket](og-image.png)](https://gobikefit.ca/)
 
 ## Live site
 
