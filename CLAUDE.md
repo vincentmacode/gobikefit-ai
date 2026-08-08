@@ -114,9 +114,11 @@ and don't put `.reveal` on anything much taller than the viewport — the observ
 `threshold: 0.15` becomes unreachable for tall elements, which is why the legal pages reveal
 `.page-hero` but not `.prose`.
 
-**One pre-launch placeholder is still in the markup**: the `gobikefit.com` domain in the
-canonical/OG tags on all four pages. `README.md` tracks it. Because `og:image` must be an
-absolute URL, the social card stays broken until the domain is real. The App Store URL
+**The canonical/OG tags carry the live domain**, `https://gobikefit.ca` — three tags per page
+(`rel="canonical"`, `og:url`, `og:image`), twelve in all. `og:image` must stay an *absolute*
+URL, so it can never be shortened to a path. The contact address `support@gobikefit.ca` is
+duplicated the same way: seven anchors, once in every footer and again in the Contact section
+of `/support` and the Contact Us clause of both legal pages. The App Store URL
 (`https://apps.apple.com/app/id6791359268`, 12 occurrences across every page's header and
 footer plus the landing hero and pricing) is the real one — it 404s only until the app is
 released. The legal texts are final — entity and governing law are filled in, and no bracket
