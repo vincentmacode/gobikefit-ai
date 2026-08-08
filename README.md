@@ -11,8 +11,7 @@ as they sit in the repo.
 
 ## Live site
 
-Not deployed yet. The canonical and Open Graph tags still point at a placeholder domain —
-see [Before launch](#before-launch).
+Not deployed yet. The canonical and Open Graph tags point at `https://gobikefit.ca`.
 
 ## Quick start
 
@@ -127,10 +126,10 @@ departures from its default output:
 
 ### Before launch
 
-- **Domain** — `https://gobikefit.com` appears in the canonical and Open Graph tags on all four
-  pages. `og:image` must stay an *absolute* URL, so the social card stays broken until this is
-  real.
 - **Repo metadata** — set the GitHub description and homepage once the site is live.
+- **Sending** — `support@gobikefit.ca` receives through Cloudflare Email Routing, which
+  forwards but does not send. Replying *from* the address needs Gmail's "Send mail as" or a
+  real mailbox before launch, since it is the address printed in the Terms.
 
 The Terms of Use entity (`Guo Rong Ma`) and governing law (`Ontario, Canada`) are filled in,
 and both legal texts are final. No bracket placeholders remain in any page.
