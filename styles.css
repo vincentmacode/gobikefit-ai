@@ -523,7 +523,7 @@ svg {
 }
 
 .pricing-card .plan-cta.secondary {
-  background: transparent;
+  background: var(--accent);
   border: 1px solid var(--border);
   color: var(--text);
 }
@@ -533,11 +533,10 @@ svg {
   background: #ff7333;
 }
 
-/* Monthly and Lifetime fill with brand orange on hover. Wins over the rule
-   above on specificity, so they land on --accent while the featured Annual
-   button — already --accent at rest — lightens to #ff7333 instead. */
+/* Monthly and Lifetime now share Annual's fill at rest, so they lighten the
+   same way on hover; the border and label resolve to match. */
 .pricing-card .plan-cta.secondary:hover {
-  background: var(--accent);
+  background: #ff7333;
   border-color: var(--accent);
   color: #fff;
 }
