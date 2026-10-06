@@ -76,12 +76,13 @@ The site works in every current browser. Two things are worth knowing:
 
 ## License
 
-The markup, CSS and JavaScript are MIT licensed — see [`LICENSE`](LICENSE).
+The HTML structure, CSS and JavaScript are MIT licensed — see [`LICENSE`](LICENSE).
 
 **The assets are not.** Everything in `assets/`, plus `og-image.png`, the favicon and manifest
-icon set, the GoBikeFit name and logo, and the Terms of Use and Privacy Policy texts are all
-rights reserved. The photography is original and the legal texts are specific to this entity,
-so a blanket permissive license would be wrong. Borrow the code, not the content.
+icon set, the GoBikeFit name and logo, the Terms of Use and Privacy Policy texts, and the
+written copy on every page are all rights reserved. The photography is original and the legal
+texts are specific to this entity, so a blanket permissive license would be wrong. Borrow the
+code, not the content or the copy.
 
 ---
 

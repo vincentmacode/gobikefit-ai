@@ -25,7 +25,7 @@ SOFTWARE.
 SCOPE
 
 The MIT grant above applies to the source code of this repository: the HTML
-markup, CSS, and JavaScript.
+structure, CSS, and JavaScript.
 
 It does NOT apply to, and all rights are reserved in:
 
@@ -35,3 +35,5 @@ It does NOT apply to, and all rights are reserved in:
     web-app-manifest-192x192.png / web-app-manifest-512x512.png
   - the GoBikeFit name, wordmark, and logo
   - the Terms of Use and Privacy Policy texts under legal/
+  - the written content of the pages: marketing copy, feature and pricing
+    descriptions, and the support and FAQ text
