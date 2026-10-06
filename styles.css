@@ -506,6 +506,26 @@ svg {
   margin-bottom: 0.5rem;
 }
 
+.pricing-card .plan-price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.pricing-card .plan-price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.pricing-card .plan-sub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: -0.5rem 0 0.75rem;
+}
+
 .pricing-card .plan-desc {
   color: var(--text-secondary);
   font-size: 0.98rem;
